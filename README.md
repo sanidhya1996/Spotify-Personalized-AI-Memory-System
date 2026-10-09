@@ -9,7 +9,7 @@ Capture listener preferences, turn them into sourced and time-bounded memories, 
 <p>
   <a href="https://spotifyfrontend11.netlify.app"><strong>🚀 Open Live App</strong></a> ·
   <a href="https://spotify-personalized-ai.onrender.com/docs"><strong>📚 API Docs</strong></a> ·
-  <a href="https://www.loom.com/share/6507ef7e4ca4416b8781151a5a94a4e1"><strong>▶ Watch Demo Video</strong></a> ·
+  <a href="https://drive.google.com/file/d/1WQNTwhhecQDPgv9NEN7sOmlCRjId33n5/view?usp=sharing"><strong>▶ Watch Demo Video</strong></a> ·
   <a href="https://github.com/omsemwal/spotify-fronted"><strong>🖥️ Frontend Repository</strong></a>
 </p>
 
@@ -49,7 +49,7 @@ Capture listener preferences, turn them into sourced and time-bounded memories, 
 | **Live API** | [spotify-personalized-ai.onrender.com](https://spotify-personalized-ai.onrender.com) | Deployed backend API |
 | **Interactive API documentation** | [OpenAPI / Swagger UI](https://spotify-personalized-ai.onrender.com/docs) | Inspect endpoints and try supported requests |
 | **Store health** | [Health of stores](https://spotify-personalized-ai.onrender.com/health/stores) | Inspect the deployed store-health endpoint |
-| **Demo video** | [Watch on Loom](https://www.loom.com/share/6507ef7e4ca4416b8781151a5a94a4e1) | Project walkthrough |
+| **Demo video** | [Watch on Loom](https://drive.google.com/file/d/1WQNTwhhecQDPgv9NEN7sOmlCRjId33n5/view?usp=sharing) | Project walkthrough |
 | **Backend repository** | [spotify-personalized-ai](https://github.com/omsemwal/spotify-personalized-ai) | API, worker, MCP server, data, tests, and backend documentation |
 | **Frontend repository** | [spotify-fronted](https://github.com/omsemwal/spotify-fronted) | Next.js web applications and frontend documentation |
 
@@ -658,6 +658,6 @@ The project is organized by component ownership so that each role is responsible
 
 **Built as a pilot for governed, user-controlled AI memory.**
 
-[🚀 Live App](https://spotifyfrontend11.netlify.app) · [📚 API Docs](https://spotify-personalized-ai.onrender.com/docs) · [▶ Demo Video](https://www.loom.com/share/6507ef7e4ca4416b8781151a5a94a4e1) · [🖥️ Frontend Repo](https://github.com/omsemwal/spotify-fronted) · [⚙️ Backend Repo](https://github.com/omsemwal/spotify-personalized-ai)
+[🚀 Live App](https://spotifyfrontend11.netlify.app) · [📚 API Docs](https://spotify-personalized-ai.onrender.com/docs) · [▶ Demo Video](https://drive.google.com/file/d/1WQNTwhhecQDPgv9NEN7sOmlCRjId33n5/view?usp=sharing) · [🖥️ Frontend Repo](https://github.com/omsemwal/spotify-fronted) · [⚙️ Backend Repo](https://github.com/omsemwal/spotify-personalized-ai)
 
 </div>
