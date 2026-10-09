@@ -1,0 +1,27 @@
+# Why this file exists
+# ====================
+#
+# abc.md §5.4 - "Apply retention by memory type, geography, age-related
+# policy, and consent state."
+#
+# data/policy_registry.yaml already sets retention BY MEMORY TYPE. These are
+# the extra limits for WHERE the listener is and HOW OLD they are. They can
+# only make retention SHORTER, never longer: the strictest rule wins.
+#
+# Used by memory/retention_rules.py, which memory/policy.py calls every time
+# a memory gets its policy class.
+#
+# The numbers are OUR choice - abc.md names the rule but no values.
+
+geography:
+  # Places with strict storage-limitation law (GDPR in the EU, UK GDPR).
+  # Nothing about a listener there is kept longer than a year.
+  strict_regions:
+    max_retention_days: 365   # our choice
+    countries: [AT, BE, BG, HR, CY, CZ, DK, EE, FI, FR, DE, GR, HU, IE, IT,
+                LV, LT, LU, MT, NL, PL, PT, RO, SK, SI, ES, SE, GB]
+
+age:
+  # Younger listeners get the shortest memory: a month at most.
+  under_18:
+    max_retention_days: 30    # our choice

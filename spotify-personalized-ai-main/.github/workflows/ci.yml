@@ -1,0 +1,33 @@
+# Continuous integration - runs on every pull request and every push to main.
+#
+# It does exactly what RUNNING.md tells a person to do: install, copy
+# .env.example, start the four stores with docker compose, set them up, then
+# run the tests. The tests replace the model, so no
+# Gemini key is needed here.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# A new push to the same branch cancels the previous run.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Tests (pytest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: cp .env.example .env
+      - run: docker compose up -d
+      - run: python scripts/setup.py
+      - run: python -m pytest -q

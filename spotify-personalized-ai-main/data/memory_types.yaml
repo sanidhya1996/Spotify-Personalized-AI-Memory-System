@@ -1,0 +1,51 @@
+# Why this file exists
+# ====================
+#
+# abc.md §7.2 step 1 - "Define the memory taxonomy: explicit preference,
+# exclusion, correction, episode, and approved inferred preference. For each
+# type, document definition, example, counterexample, sensitivity,
+# retention, and retrieval eligibility."
+#
+# Sensitivity, retention and retrieval eligibility are in
+# data/policy_registry.yaml, because the policy engine enforces them. This
+# file holds the other three - definition, example, counterexample - which
+# explain each type to a person.
+#
+# Used by memory/memory_types.py, which checks every type is here, and by
+# GET /policy, which the console's "Schema & policy" screen shows.
+
+explicit_preference:
+  definition: Something the listener said outright that they like, and that
+    is worth remembering beyond this conversation.
+  example: '"I love Arijit Singh''s romantic songs."'
+  counterexample: '"Play some Arijit Singh" - a request for now, not a
+    statement about what they like. That is an episode at most.'
+
+exclusion:
+  definition: Something the listener said outright that they do not want.
+    It must be respected everywhere until they change it.
+  example: '"Never play heavy metal for me."'
+  counterexample: Skipping one heavy-metal track. A single skip is a
+    signal, not a stated rule.
+
+correction:
+  definition: The listener fixing something the system believed. It
+    replaces the old memory, which is kept as history, not deleted.
+  example: '"I don''t like jazz any more, I like lo-fi now."'
+  counterexample: '"Not this song" - rejecting one recommendation is
+    feedback on that answer, not a change to a stored fact.'
+
+episode:
+  definition: One thing that happened, useful for continuing the
+    conversation for a short while but not for describing the listener.
+  example: Played focus music this morning.
+  counterexample: Prefers low-vocal focus playlists while working - that
+    describes the listener, so it is a preference, not an episode.
+
+candidate_preference:
+  definition: A preference the system inferred rather than was told. It
+    becomes durable only after the listener confirms it or it is seen
+    repeatedly; until then it is used only in chat, with low confidence.
+  example: Saved five lo-fi playlists this week, so may like lo-fi.
+  counterexample: Seems sad today, so likes sad songs - mood and emotional
+    state are never stored as a preference (abc.md:53).

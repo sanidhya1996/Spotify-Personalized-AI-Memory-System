@@ -1,0 +1,35 @@
+# Why this file exists
+# ====================
+#
+# Tells Netlify which app in this repository to deploy: the memory console in
+# apps/memory-console - the one app with login and all seven pages.
+#
+# Netlify detects Next.js and runs it with its own adapter. Check its docs
+# list the Next.js version in apps/memory-console/package.json before relying
+# on it; Vercel is the fallback.
+#
+# Set two environment variables in Netlify's site settings (never here):
+#   MEMORY_API_BASE_URL   the deployed backend, e.g. https://memory-api.onrender.com
+#   MEMORY_JWT_SECRET     the same secret the backend uses
+
+[build]
+  base = "apps/memory-console"
+  command = "npm run build"
+  # Where Next.js puts the built app, relative to `base`. Without it Netlify
+  # serves the folder as plain files and every page answers 404.
+  publish = ".next"
+
+[build.environment]
+  # Netlify's secret scanner stops the build when a secret's value appears
+  # in any file. Next.js's own build cache (.next/cache) holds the server
+  # settings it compiled with, including MEMORY_JWT_SECRET. That cache is
+  # internal to the build and never served - so only it is skipped. The
+  # scanner still checks everything that is deployed, including all
+  # browser JavaScript, and found no secret there.
+  SECRETS_SCAN_OMIT_PATHS = ".netlify/.next/cache/**,.next/cache/**"
+
+# Netlify's official Next.js runtime: turns the app's pages and API routes
+# (login, the gateway, songs) into Netlify functions. Netlify usually adds it
+# on its own; naming it makes sure it always runs.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

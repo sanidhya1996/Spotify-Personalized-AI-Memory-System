@@ -1,0 +1,100 @@
+# Everything this project needs to run.
+#
+#     docker compose up -d
+#
+# Four stores, matching the defaults in .env.example, so a fresh clone
+# works without editing anything except the API key.
+#
+# abc.md:219 - PostgreSQL: "Stores consent state, ingestion status, tool
+#              audit, experiments, feedback, and deletion jobs."
+# abc.md:222 - Redis: "Short-lived subject-scoped caching, rate limiting,
+#              and idempotency support."
+# abc.md:210 - Neo4j: "Temporal graph relationships, indexed traversal,
+#              provenance, and evolving user-content relationships."
+# abc.md:207 - Redpanda: "Durable event capture, partitioning, replay,
+#              backpressure, and consumer isolation." The specification
+#              says "Apache Kafka or Redpanda"; Redpanda is one container
+#              rather than a JVM stack, and speaks the same protocol.
+#
+# Stop with:   docker compose down          (data is kept)
+# Wipe with:   docker compose down -v       (deletes the volumes)
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: memory-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: memory_local_dev
+      POSTGRES_DB: spotify_personalized_ai
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Every .sql file here runs on first start, in name order, so the
+      # tables exist before the API does.
+      - ./infrastructure/database-migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d spotify_personalized_ai"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7
+    container_name: memory-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  neo4j:
+    image: neo4j:5-community
+    container_name: memory-neo4j
+    environment:
+      NEO4J_AUTH: neo4j/neo4j_password_secure
+      # The vector index needs a little room to build.
+      NEO4J_server_memory_heap_max__size: 512M
+    ports:
+      - "7474:7474"     # the browser at http://localhost:7474
+      - "7687:7687"     # bolt, which the app connects to
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  redpanda:
+    image: redpandadata/redpanda:latest
+    container_name: memory-redpanda
+    command:
+      - redpanda
+      - start
+      - --smp=1                    # one core is plenty for a pilot
+      - --memory=512M
+      - --overprovisioned          # do not expect dedicated hardware
+      - --node-id=0
+      # Two listeners on purpose. Other containers reach 9092 by hostname;
+      # a client on the host machine cannot resolve `redpanda`, so it uses
+      # 19092, which advertises itself as localhost.
+      - --kafka-addr=internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr=internal://redpanda:9092,external://localhost:19092
+    ports:
+      - "19092:19092"
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
+    healthcheck:
+      test: ["CMD-SHELL", "rpk cluster health | grep -q 'Healthy:.*true'"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  postgres_data:
+  neo4j_data:
+  redpanda_data:

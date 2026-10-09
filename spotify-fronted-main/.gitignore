@@ -1,0 +1,6 @@
+# Editor and tooling files that belong to a machine, not to the repo.
+.idea/
+.vscode/
+
+# Local environment
+.env.local

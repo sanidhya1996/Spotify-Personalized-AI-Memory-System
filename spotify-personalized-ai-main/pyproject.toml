@@ -1,0 +1,19 @@
+[project]
+name = "spotify-memory"
+version = "0.1.0"
+description = "Personalized AI memory system for Spotify surfaces"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "httpx",
+]
+
+[tool.setuptools.packages.find]
+include = ["memory*"]

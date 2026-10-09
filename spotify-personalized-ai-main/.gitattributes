@@ -1,0 +1,19 @@
+# Normalise line endings.
+#
+# Development happens on Windows, CI runs on Linux, and the services run in
+# Linux containers. Without this, every file touched on Windows shows up as a
+# whole-file diff, and shell scripts copied into a container fail with
+# "bad interpreter". Store everything as LF in the repository.
+* text=auto eol=lf
+
+# Shell scripts must keep LF even if a tool tries to be helpful.
+*.sh text eol=lf
+
+# Binary — never touch these.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.ico binary
+# Windows batch files must keep Windows line endings (CRLF), or cmd.exe can
+# misread them after a fresh clone.
+*.cmd text eol=crlf

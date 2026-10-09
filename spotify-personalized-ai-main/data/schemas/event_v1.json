@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "required": [
+    "consent_state",
+    "event_type",
+    "idempotency_key",
+    "locale",
+    "occurred_at",
+    "schema_version",
+    "source_event_id",
+    "subject_id",
+    "surface"
+  ],
+  "allowed_values": {
+    "event_type": [
+      "ai_interaction",
+      "correction",
+      "explicit_preference",
+      "follow",
+      "playback",
+      "save",
+      "skip"
+    ],
+    "surface": [
+      "chat",
+      "player",
+      "search"
+    ],
+    "consent_state": [
+      "denied",
+      "granted",
+      "paused"
+    ]
+  }
+}

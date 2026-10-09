@@ -1,0 +1,61 @@
+# Why this file exists
+# ====================
+#
+# abc.md:115 - "Assign confidence and policy class using deterministic
+#               rules plus structured model output."
+# abc.md:237 - the system needs a "policy registry describing allowed
+#               memory types, sensitivity, ... retention ... and
+#               retrieval eligibility."
+# abc.md:292 - "Document ... sensitivity, retention, and retrieval
+#               eligibility for each type."
+#
+# Three fields per memory type, which is exactly what abc.md:292 asks for.
+#
+# It is data, not code, so changing a policy is a reviewable change to this
+# file rather than an edit to a Python module.
+#
+# IMPORTANT - what is specified and what is not:
+#   SPECIFIED: retention varies BY MEMORY TYPE (abc.md:139), and each type
+#              needs these three fields (abc.md:292).
+#   NOT SPECIFIED: the actual numbers. abc.md never says how long anything
+#              lives. Every retention_days value below is OUR choice and can
+#              be changed without breaking any requirement.
+#
+# The surface names come from abc.md:108, which fixes them as chat, player
+# and search.
+
+explicit_preference:
+  # Stated outright by the listener. The most trustworthy kind of memory,
+  # so it lives longest and may be used anywhere.
+  sensitivity: normal
+  retention_days: 365          # our choice
+  retrieval_eligibility: [chat, player, search]
+
+exclusion:
+  # "Do not play country music." Must outlive everything else: forgetting
+  # an exclusion means doing the exact thing the listener asked us not to.
+  sensitivity: normal
+  retention_days: 730          # our choice
+  retrieval_eligibility: [chat, player, search]
+
+correction:
+  # The listener fixing something we believed. Kept as long as the fact it
+  # corrects, or the old belief could resurface.
+  sensitivity: normal
+  retention_days: 730          # our choice
+  retrieval_eligibility: [chat, player, search]
+
+candidate_preference:
+  # A guess, not confirmed. abc.md:49 - it becomes durable only after
+  # explicit confirmation or repeated evidence. Short life and chat only,
+  # because an unconfirmed guess should not silently steer playback.
+  sensitivity: normal
+  retention_days: 90           # our choice
+  retrieval_eligibility: [chat]
+
+episode:
+  # One thing that happened. Useful for continuing a conversation, not for
+  # describing someone, so it fades quickly.
+  sensitivity: normal
+  retention_days: 30           # our choice
+  retrieval_eligibility: [chat]

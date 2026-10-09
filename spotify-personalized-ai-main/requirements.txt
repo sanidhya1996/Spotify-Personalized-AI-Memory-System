@@ -1,0 +1,28 @@
+# Everything this project needs.
+#
+#     pip install -r requirements.txt
+#
+# Pinned to the versions it was built and tested against.
+
+# --- The API ---------------------------------------------------------------
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+pydantic==2.13.5
+python-dotenv==1.2.3
+PyJWT==2.14.0
+PyYAML==6.0.3
+
+# --- Stores ----------------------------------------------------------------
+psycopg[binary]==3.3.6        # PostgreSQL: consent, events, audit, jobs
+psycopg-pool==3.3.3           # connection pool - 5x faster than reconnecting
+redis==8.1.0                  # idempotency keys, rate limits
+neo4j==6.3.1                  # the temporal memory graph and its vectors
+kafka-python==3.0.11          # Redpanda, for the ingestion queue
+
+# --- The model -------------------------------------------------------------
+google-genai==2.25.0          # extraction (abc.md names no provider)
+fastembed==0.8.1              # embeddings: all-MiniLM-L6-v2, run locally without PyTorch (abc.md:212)
+
+# --- Tests -----------------------------------------------------------------
+pytest==9.1.1
+httpx==0.28.1                 # used by fastapi's TestClient

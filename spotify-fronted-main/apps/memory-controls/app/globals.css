@@ -1,0 +1,39 @@
+/* Why this file exists
+   ====================
+
+   The one stylesheet. It loads Tailwind and names the handful of colours the
+   console uses, so a screen writes `bg-panel` instead of repeating a hex code.
+
+   The console is dark because operators keep it open beside logs all day, and
+   because the green accent reads as Spotify without borrowing their assets. */
+
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces, darkest first. */
+  --color-base: #08090b;
+  --color-panel: #101216;
+  --color-raised: #171a20;
+  --color-edge: #23272f;
+
+  /* Text. */
+  --color-ink: #f3f5f7;
+  --color-muted: #9aa3af;
+  --color-faint: #67707d;
+
+  /* Meaning. Green is "kept", amber is "careful", red is "removed". */
+  --color-accent: #1db954;
+  --color-warn: #e8a33d;
+  --color-bad: #e5484d;
+  --color-info: #5b8def;
+}
+
+body {
+  background: var(--color-base);
+  color: var(--color-ink);
+}
+
+/* Long facts and fenced context blocks wrap instead of scrolling sideways. */
+.wrap-anywhere {
+  overflow-wrap: anywhere;
+}

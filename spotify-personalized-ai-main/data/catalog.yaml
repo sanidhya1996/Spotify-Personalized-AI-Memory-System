@@ -1,0 +1,125 @@
+# Why this file exists
+# ====================
+#
+# abc.md:113 - "Resolve artists, tracks, albums, playlists, shows,
+#               episodes, topics, activities, and contextual concepts to
+#               canonical identifiers."
+# abc.md:234 - "Canonical catalog entity data for artists, tracks, albums,
+#               playlists, shows, episodes, topics, and supported
+#               contextual concepts."
+# abc.md:295 - "Map catalog entities to stable identifiers ... maintain
+#               alias tables."
+#
+# Without this, "the weeknd", "The Weeknd" and "weeknd" are three unrelated
+# memories and none of them can be searched for.
+#
+# `aliases` is the alias table abc.md:295 asks for: every way a listener
+# might write the same thing. Matching is case-insensitive, so aliases are
+# written in lower case.
+#
+# abc.md:245 - seeded data must be synthetic and contain no real private
+# interaction history. These are real public artist and show names used as
+# catalog reference data, with no listener attached to any of them.
+
+artist:
+  - id: artist_the_weeknd
+    name: The Weeknd
+    aliases: [the weeknd, weeknd, abel tesfaye]
+  - id: artist_marconi_union
+    name: Marconi Union
+    aliases: [marconi union, marconi]
+  - id: artist_nina_simone
+    name: Nina Simone
+    aliases: [nina simone, nina]
+  - id: artist_bad_bunny
+    name: Bad Bunny
+    aliases: [bad bunny, benito]
+  - id: artist_ludovico_einaudi
+    name: Ludovico Einaudi
+    aliases: [ludovico einaudi, einaudi]
+
+track:
+  - id: track_weightless
+    name: Weightless
+    aliases: [weightless]
+  - id: track_blinding_lights
+    name: Blinding Lights
+    aliases: [blinding lights]
+  - id: track_feeling_good
+    name: Feeling Good
+    aliases: [feeling good]
+
+album:
+  - id: album_after_hours
+    name: After Hours
+    aliases: [after hours]
+  - id: album_i_put_a_spell_on_you
+    name: I Put a Spell on You
+    aliases: [i put a spell on you]
+
+playlist:
+  - id: playlist_deep_focus
+    name: Deep Focus
+    aliases: [deep focus, focus playlist, focus mix]
+  - id: playlist_peaceful_piano
+    name: Peaceful Piano
+    aliases: [peaceful piano, piano playlist]
+
+show:
+  - id: show_the_daily
+    name: The Daily
+    aliases: [the daily, daily podcast]
+  - id: show_song_exploder
+    name: Song Exploder
+    aliases: [song exploder]
+
+episode:
+  - id: episode_song_exploder_101
+    name: Song Exploder 101
+    aliases: [song exploder 101]
+
+# Genres, moods-of-music and subjects. Not moods of the listener - those
+# are blocked by abc.md:53 and never resolved to anything.
+topic:
+  - id: topic_instrumental
+    name: instrumental music
+    aliases: [instrumental, instrumental music, no vocals, low-vocal, lo-vocal]
+  - id: topic_country
+    name: country music
+    aliases: [country, country music]
+  - id: topic_jazz
+    name: jazz
+    aliases: [jazz, jazz music]
+  - id: topic_classical
+    name: classical music
+    aliases: [classical, classical music]
+  - id: topic_reggaeton
+    name: reggaeton
+    aliases: [reggaeton]
+  - id: topic_ambient
+    name: ambient
+    aliases: [ambient, ambient music]
+  - id: topic_true_crime
+    name: true crime
+    aliases: [true crime, crime podcasts]
+  - id: topic_news
+    name: news
+    aliases: [news, news podcasts, current affairs]
+
+# What the listener is doing - the "contextual concepts" of abc.md:113.
+activity:
+  - id: activity_working
+    name: working
+    aliases: [working, work, at work, while working]
+  - id: activity_studying
+    name: studying
+    aliases: [studying, study, revision, for studying]
+  - id: activity_running
+    name: running
+    aliases: [running, run, jogging]
+  - id: activity_sleeping
+    name: sleeping
+    aliases: [sleeping, sleep, bedtime, falling asleep]
+  - id: activity_commuting
+    name: commuting
+    aliases: [commuting, commute, driving to work]

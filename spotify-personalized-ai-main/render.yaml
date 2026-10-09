@@ -1,0 +1,61 @@
+# Why this file exists
+# ====================
+#
+# Deploys the backend on Render's FREE plan: one web service that runs the
+# API and, inside it, the worker (RUN_WORKER_IN_API) - free plans have no
+# separate background worker. Render reads this file when you choose
+# New -> Blueprint and pick this repository; the same settings can also be
+# typed into a plain "New Web Service".
+#
+# The stores are free services elsewhere, each giving one connection string:
+#   PostgreSQL -> Neon            (DATABASE_URL)
+#   Redis      -> any free Redis  (REDIS_URL - rediss:// when it uses TLS)
+#   Neo4j      -> Neo4j AuraDB    (NEO4J_URI, NEO4J_PASSWORD)
+#   Kafka      -> Redpanda Cloud  (KAFKA_BOOTSTRAP, KAFKA_USERNAME, KAFKA_PASSWORD)
+#
+# No setup step is needed: when the API starts it creates the tables, the
+# Neo4j constraints and the vector index if they are missing
+# (memory/startup.py).
+#
+# Memory: about 320 MB with the worker inside, under the free 512 MB - the
+# embedding model runs without PyTorch (memory/embeddings.py).
+#
+# Every `sync: false` value is a secret: Render asks for it in its dashboard.
+# Never write secrets in this file or in GitHub.
+
+services:
+  - type: web
+    name: spotify-personalized-ai
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn memory.api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.14.3"
+      - key: RUN_WORKER_IN_API
+        value: "true"
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: MEMORY_JWT_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: NEO4J_URI
+        sync: false
+      - key: NEO4J_USER
+        value: neo4j
+      - key: NEO4J_PASSWORD
+        sync: false
+      - key: KAFKA_BOOTSTRAP
+        sync: false
+      - key: KAFKA_USERNAME
+        sync: false
+      - key: KAFKA_PASSWORD
+        sync: false
+      - key: KAFKA_SASL_MECHANISM
+        value: SCRAM-SHA-256   # PLAIN for Confluent Cloud
