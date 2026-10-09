@@ -49,7 +49,7 @@ Capture listener preferences, turn them into sourced and time-bounded memories, 
 | **Live API** | [spotify-personalized-ai.onrender.com](https://spotify-personalized-ai.onrender.com) | Deployed backend API |
 | **Interactive API documentation** | [OpenAPI / Swagger UI](https://spotify-personalized-ai.onrender.com/docs) | Inspect endpoints and try supported requests |
 | **Store health** | [Health of stores](https://spotify-personalized-ai.onrender.com/health/stores) | Inspect the deployed store-health endpoint |
-| **Demo video** | [Watch on Loom](https://drive.google.com/file/d/1WQNTwhhecQDPgv9NEN7sOmlCRjId33n5/view?usp=sharing) | Project walkthrough |
+| **Demo video** | [Watch here ](https://drive.google.com/file/d/1WQNTwhhecQDPgv9NEN7sOmlCRjId33n5/view?usp=sharing) | Project walkthrough |
 | **Backend repository** | [spotify-personalized-ai](https://github.com/omsemwal/spotify-personalized-ai) | API, worker, MCP server, data, tests, and backend documentation |
 | **Frontend repository** | [spotify-fronted](https://github.com/omsemwal/spotify-fronted) | Next.js web applications and frontend documentation |
 
