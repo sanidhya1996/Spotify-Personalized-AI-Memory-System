@@ -631,11 +631,21 @@ apps/memory-console/      Main app: login and seven memory screens
 apps/memory-controls/     Listener review/control page
 ```
 
-## 👥 Team contribution
+## 👥 Team Contribution Ownership Matrix
 
-The supplied backend README describes this as a **single-contributor pilot build**.
+This project is built and maintained by **9 Team Member Roles**:
 
----
+| Member | Assigned Component / Directory | Primary Ownership & Responsibilities |
+| :--- | :--- | :--- |
+| **👑 Lead** | `packages/contracts/`, Root | Architecture blueprint, shared Pydantic models, Docker setup, pipeline spec. |
+| **Member 1** | `services/ingestion-api/` | Event ingestion, schema validation, Redis idempotency check, Kafka producer. |
+| **Member 2** | `services/memory-processor/` | Kafka consumer worker, memory classification, entity resolution, confidence scoring. |
+| **Member 3** | `packages/graph-schema/` | Neo4j temporal graph storage, provenance linking, Cypher query optimization. |
+| **Member 4** | `services/retrieval-api/` | SentenceTransformers embeddings, Qdrant vector index, hybrid ranking algorithm. |
+| **Member 5** | `services/context-composer/` | Prompt-injection proof context packaging, token budget enforcement, LLM chat. |
+| **Member 6** | `services/memory-mcp-server/` | Dedicated FastMCP tool server with authentication & rate limiting. |
+| **Member 7** | `services/deletion-orchestrator/` & `packages/policy-engine/` | Cross-store privacy deletion, consent enforcement, tenant isolation security checks. |
+| **Member 8** | `apps/memory-controls/` & `apps/memory-console/` | Next.js/React User Memory Controls sidebar & Internal Admin Console. |
 
 <div align="center">
 
